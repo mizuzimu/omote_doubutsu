@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表動物診断</title>
+    <style>
+        html {
+            background-image: url("haikei.jpg");
+            background-size: 30%;
+        }
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-size: 1.5rem;
+            width: 50%;
+            background-color: yellow;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2.5rem;
+        }
+        input, button {
+            font-size: 2rem;
+            height: 4rem;
+            padding: 0 auto;
+            margin: 10px 0;
+        }
+        button {
+            background-color: cyan;
+            color: black;
+        }
+        .result {
+            margin-top: 1em;
+            font-size: 1em;
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+
+<h1>表動物診断（オンライン版）</h1>
+<img src="logo.gif" style="height: 5rem"></img>
+
+<br>
+
+大人気の本がWEBに対応しました!
+<p><span style="color: red">NEW:</span>あなたが2001以降生まれであっても、あなたはこのアナリシスを使用できます!！現代の技術はすごいですね。</p>
+<label for="birthday">あなたの誕生日を入力してください。</label><br>
+<input type="date" id="birthday" name="birthday" onchange="clearResult()"><br>
+<button onclick="calculateAnimal()">Calculate アナタの表動物</button>
+
+<div class="result" id="result"></div>
+
+<script>
+    function calculateAnimal() {
+        const birthdayInput = document.getElementById('birthday').value;
+        const resultDiv = document.getElementById('result');
+
+        if (!birthdayInput) {
+            resultDiv.innerHTML = "有効な日付を入力してください。";
+            return;
+        }
+
+        const birthday = new Date(birthdayInput);
+        const startDate = new Date('1930-01-01');
+
+        if (birthday < startDate) {
+            resultDiv.innerHTML = "あなたは年を取りすぎています。申し訳ございません。";
+            return;
+        }
+
+        const diffTime = birthday - startDate;
+        const magicNumber = (Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 48) % 60;
+        const img = `<img src="chart.jpg" style="display:block;height:12em"></img>`
+
+        resultDiv.innerHTML = `あなたの表アニマルを計算できません！冗談です。あなたは笑いました？フロント動物を知るためには、下の表であなたの番号を調べてください。すごいですね。${img}<button onclick="alert('こんなくだらないもの共有するな')">あなたの結果を共有する</button>`;
+    }
+    function clearResult() {
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = "";
+    }
+</script>
+
+</body>
+</html>
